@@ -2,11 +2,11 @@
   <configuration default="false" factoryName="Application" name="Minecraft Server (:fabric)" type="Application">
     
     <option name="MAIN_CLASS_NAME" value="dev.architectury.transformer.TransformerRuntime"/>
-    <module name="ModTemplate.fabric.main"/>
+    <module name="SimpleBackupSystems.fabric.main"/>
     <option name="PROGRAM_PARAMETERS" value="nogui"/>
     <shortenClasspath name="ARGS_FILE"/>
     <option name="VM_PARAMETERS" value="-Dfabric.dli.config=D:\Workspaces\Minecraft\Architectury\ModTemplate\fabric\.gradle\loom-cache\launch.cfg -Dfabric.dli.env=server -Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotServer -Darchitectury.main.class=D:\Workspaces\Minecraft\Architectury\ModTemplate\fabric\.gradle\architectury\.main_class -Darchitectury.runtime.transformer=D:\Workspaces\Minecraft\Architectury\ModTemplate\fabric\.gradle\architectury\.transforms -Darchitectury.properties=D:\Workspaces\Minecraft\Architectury\ModTemplate\fabric\.gradle\architectury\.properties -Djdk.attach.allowAttachSelf=true -javaagent:D:\Workspaces\Minecraft\Architectury\ModTemplate\.gradle\architectury\architectury-transformer-agent.jar"/>
-    <option name="WORKING_DIRECTORY" value="$ProjectFileDir$/run/server"/>
+    <option name="WORKING_DIRECTORY" value="run/server"/>
     <method v="2">
       <option enabled="true" name="Make"/>
     </method>
