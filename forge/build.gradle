@@ -15,13 +15,13 @@ configurations {
 }
 
 dependencies {
+    api 'org.apache.commons:commons-compress:1.23.0'
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-    modImplementation "maven.modrinth:simple-mod-config:${rootProject.simplemodconfig}"
 }
 
 processResources {
@@ -48,8 +48,9 @@ processResources {
 shadowJar {
     exclude "fabric.mod.json"
 
-    configurations = [project.configurations.shadowCommon]
+    configurations = [project.configurations.shadowCommon, project.configurations.extraLibs]
     archiveClassifier.set("dev-shadow")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 remapJar {
@@ -60,6 +61,10 @@ remapJar {
 
 jar {
     archiveClassifier.set("dev")
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 sourcesJar {

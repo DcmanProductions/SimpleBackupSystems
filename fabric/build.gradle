@@ -16,6 +16,7 @@ configurations {
 }
 
 dependencies {
+    api 'org.apache.commons:commons-compress:1.23.0'
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
     // Comment to disable fabric api
@@ -28,7 +29,6 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     modImplementation "maven.modrinth:modmenu:${rootProject.modmenu}"
-    modImplementation "maven.modrinth:simple-mod-config:${rootProject.simplemodconfig}"
 }
 
 processResources {
@@ -54,8 +54,10 @@ processResources {
 }
 
 shadowJar {
-    configurations = [project.configurations.shadowCommon]
+    configurations = [project.configurations.shadowCommon, project.configurations.extraLibs]
     archiveClassifier.set("dev-shadow")
+    mergeServiceFiles()
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 remapJar {
@@ -66,6 +68,10 @@ remapJar {
 
 jar {
     archiveClassifier.set("dev")
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 sourcesJar {
