@@ -2,29 +2,29 @@
   "schemaVersion": 1,
   "id": "${modid}",
   "version": "${version}",
-
   "name": "${name}",
   "description": "${description}",
-  "authors": ["${author}"],
+  "authors": [
+    "${author}"
+  ],
   "contact": {
     "homepage": "${homepage}",
     "sources": "${sourcecode}",
     "issues": "${sourcecode}/issues"
   },
-
   "license": "${license}",
   "icon": "${icon}",
-
   "environment": "*",
   "entrypoints": {
     "main": [
-      "chase.minecraft.architectury.modtemplate.fabric.ModTemplateFabric"
-    ]
+      "chase.minecraft.architectury.simplebackupsystem.fabric.SimpleBackupSystemFabric"
+    ],
+    "modmenu": [
+      "chase.minecraft.architectury.simplebackupsystem.fabric.ModMenu"
+    ],
+    "server": ["chase.minecraft.architectury.simplebackupsystem.fabric.SimpleBackupSystemServerFabric"]
   },
-  "mixins": [
-    "mod-template.mixins.json",
-    "mod-template-common.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=${loader}",
     "fabric-api": ">=${api}",
